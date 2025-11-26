@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <title>Hokkai AR</title>
+
+  <!-- A-Frame と AR.js -->
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar.js"></script>
+
+  <style>
+    body { margin: 0; overflow: hidden; }
+    #info {
+      position: absolute; left: 10px; top: 10px; z-index: 10;
+      background: rgba(0,0,0,0.4); color: white; padding: 8px; border-radius: 6px;
+      font-family: Arial, sans-serif; font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="info">北海一号機 — QRで起動</div>
+
+  <a-scene embedded arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
+    <a-assets>
+      <!-- glbを読み込む（同じフォルダに model.glb を置く） -->
+      <a-asset-item id="hokkaiModel" src="model.glb"></a-asset-item>
+    </a-assets>
+
+    <!-- マーカーなし（位置固定ではなく、カメラ中心に表示） -->
+    <a-entity id="model"
+              gltf-model="#hokkaiModel"
+              scale="1 1 1"
+              position="0 0 -2"
+              rotation="0 180 0">
+    </a-entity>
+
+    <!-- 簡単な照明 -->
+    <a-entity light="type: directional; intensity: 0.8" position="0 5 2"></a-entity>
+    <a-entity light="type: ambient; intensity: 0.6"></a-entity>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
+</html>
